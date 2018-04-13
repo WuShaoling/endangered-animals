@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.sdust.wsl.dao.AnimalMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.sdust.wsl.bean.Animal">
+        <id column="aid" jdbcType="INTEGER" property="aid"/>
+        <result column="aname" jdbcType="VARCHAR" property="aname"/>
+        <result column="degree" jdbcType="INTEGER" property="degree"/>
+        <result column="atime" jdbcType="DATE" property="atime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.sdust.wsl.bean.Animal">
+        <result column="image" jdbcType="LONGVARCHAR" property="image"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    aid, aname, degree, atime
+  </sql>
+    <sql id="Blob_Column_List">
+    image
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from animal
+        where aid = #{aid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from animal
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="cn.edu.sdust.wsl.bean.Animal">
+    insert into animal (aid, aname, degree, 
+      atime, image)
+    values (#{aid,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR}, #{degree,jdbcType=INTEGER}, 
+      #{atime,jdbcType=DATE}, #{image,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.edu.sdust.wsl.bean.Animal">
+        insert into animal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="aid != null">
+                aid,
+            </if>
+            <if test="aname != null">
+                aname,
+            </if>
+            <if test="degree != null">
+                degree,
+            </if>
+            <if test="atime != null">
+                atime,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="aid != null">
+                #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="aname != null">
+                #{aname,jdbcType=VARCHAR},
+            </if>
+            <if test="degree != null">
+                #{degree,jdbcType=INTEGER},
+            </if>
+            <if test="atime != null">
+                #{atime,jdbcType=DATE},
+            </if>
+            <if test="image != null">
+                #{image,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.edu.sdust.wsl.bean.Animal">
+        update animal
+        <set>
+            <if test="aname != null">
+                aname = #{aname,jdbcType=VARCHAR},
+            </if>
+            <if test="degree != null">
+                degree = #{degree,jdbcType=INTEGER},
+            </if>
+            <if test="atime != null">
+                atime = #{atime,jdbcType=DATE},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where aid = #{aid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.sdust.wsl.bean.Animal">
+    update animal
+    set aname = #{aname,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=INTEGER},
+      atime = #{atime,jdbcType=DATE},
+      image = #{image,jdbcType=LONGVARCHAR}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="cn.edu.sdust.wsl.bean.Animal">
+    update animal
+    set aname = #{aname,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=INTEGER},
+      atime = #{atime,jdbcType=DATE}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+</mapper>

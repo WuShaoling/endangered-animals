@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="aliyun-java-sdk-core-2.1.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/wsl/WEB-INF/lib/aliyun-java-sdk-core-2.1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/wsl/WEB-INF/lib/aliyun-java-sdk-sts-2.1.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
