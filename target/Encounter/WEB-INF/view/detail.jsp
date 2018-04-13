@@ -124,7 +124,6 @@
                 if (data.code == 1) {
                     window.location.href = "/un/";
                 }
-                alert(data);
             }
         });
     }
