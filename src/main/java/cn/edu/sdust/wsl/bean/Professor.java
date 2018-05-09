@@ -13,6 +13,22 @@ public class Professor {
 
     private String pemail;
 
+    public Professor() {
+
+    }
+
+    public Professor(String account,
+                     String username,
+                     String password,
+                     String phone,
+                     String email) {
+        this.paccount = account;
+        this.pcode = password;
+        this.panme = username;
+        this.pphone = phone;
+        this.pemail = email;
+    }
+
     public Integer getPid() {
         return pid;
     }

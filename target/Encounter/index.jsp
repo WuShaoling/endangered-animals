@@ -1,86 +1,97 @@
-<%@ page import="cn.edu.sdust.wsl.bean.UnIdentified" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
-  User: WSL
-  Date: 2018-04-12
-  Time: 21:47
+  User: wu124
+  Date: 2018-05-09
+  Time: 13:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Pandora</title>
-
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic|Roboto:400,300,700'
-          rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="source/css/animate.css">
-    <link rel="stylesheet" href="source/css/icomoon.css">
-    <link rel="stylesheet" href="source/css/bootstrap.css">
-    <link rel="stylesheet" href="source/css/style.css">
-
-    <script src="source/js/modernizr-2.6.2.min.js"></script>
-    <script src="source/js/respond.min.js"></script>
-
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="source/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="source/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="source/assets/css/form-elements.css">
+    <link rel="stylesheet" href="source/assets/css/style.css">
+    <link rel="shortcut icon" href="source/assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="source/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="source/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="source/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="source/assets/ico/apple-touch-icon-57-precomposed.png">
 </head>
-<body>
-<div id="fh5co-offcanvas">
-    <a href="#" class="fh5co-close-offcanvas js-fh5co-close-offcanvas"><span><i
-            class="icon-cross3"></i> <span>Close</span></span></a>
-    <div class="fh5co-bio">
-        <figure>
-            <img src="source/images/person1.jpg" alt="Free HTML5 Bootstrap Template" class="img-responsive">
-        </figure>
-        <h3 class="heading">关于我</h3>
-        <h2>WSL</h2>
-        <p>动物保护专家. </p>
-    </div>
-</div>
 
-<header id="fh5co-header">
-    <div class="container-fluid">
-        <div class="row">
-            <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-            <div class="col-lg-12 col-md-12 text-center">
-                <h1 id="fh5co-logo"><a href="index.html">Pandora专家识别系统</a></h1>
+<body>
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1>Pandora专家系统</h1>
+                    <div class="description">
+                        <p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>登录系统</h3>
+                            <p>输入用户名和密码：</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-key"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="" method="post" class="login-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">Username</label>
+                                <input type="text" name="form-username" placeholder="Username..."
+                                       class="form-username form-control" id="form-username">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-password">Password</label>
+                                <input type="password" name="form-password" placeholder="Password..."
+                                       class="form-password form-control" id="form-password">
+                            </div>
+                            <button onclick="Login()" type="button" class="btn">登录</button>
+                            <center><a href="/toregister">注册</a></center>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</header>
-
-<div class="container-fluid">
-    <div class="row fh5co-post-entry">
-        <%
-            Iterator<UnIdentified> it = ((List<UnIdentified>) request.getAttribute("data")).iterator();
-            while (it.hasNext()) {
-                UnIdentified temp = it.next();
-                out.print("<article class=\"col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box\">");
-                out.print("<figure>");
-                out.print("<a><img src=\"");
-                out.print(temp.getUimage());
-                out.print("\" alt=\"Image\" class=\"img-responsive\"></a>");
-                out.print("</figure>");
-                out.print("<span class=\"fh5co-meta\"><a href=getdetail?uid=" + temp.getUid() + ">点击查看详情</a></span>");
-                out.print("<span class=\"fh5co-meta fh5co-date\">");
-                out.print(temp.getTime());
-                out.print("</span>");
-                out.print("</article>");
-            }
-        %>
-    </div>
 </div>
 
-<script src="source/js/jquery.min.js"></script>
-<script src="source/js/jquery.easing.1.3.js"></script>
-<script src="source/js/bootstrap.min.js"></script>
-<script src="source/js/jquery.waypoints.min.js"></script>
-<script src="source/js/main.js"></script>
+<script src="source/assets/js/jquery-1.11.1.min.js"></script>
+<script src="source/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="source/assets/js/jquery.backstretch.min.js"></script>
+<script src="source/assets/js/scripts.js"></script>
+<script>
+    function Login() {
+        var username = document.getElementById("form-username").value;
+        var password = document.getElementById("form-password").value;
+        $.ajax({
+            type: "POST",
+            url: "/professor/login",
+            data: {username: username, password: password},
+            dataType: "json",
+            success: function (data) {
+                if (data == "1") {
+                    window.location.href = "/un/";
+                } else {
+                    alert(data)
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>
-

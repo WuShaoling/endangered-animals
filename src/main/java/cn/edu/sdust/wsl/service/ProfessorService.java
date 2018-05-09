@@ -31,6 +31,10 @@ public class ProfessorService implements ProfessorMapper {
         return null;
     }
 
+    public Professor selectByAccount(String paccount) {
+        return professorMapper.selectByAccount(paccount);
+    }
+
     @Override
     public int updateByPrimaryKeySelective(Professor record) {
         return 0;

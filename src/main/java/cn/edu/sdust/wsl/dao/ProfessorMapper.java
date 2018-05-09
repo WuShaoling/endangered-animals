@@ -14,4 +14,6 @@ public interface ProfessorMapper {
     int updateByPrimaryKeySelective(Professor record);
 
     int updateByPrimaryKey(Professor record);
+
+    Professor selectByAccount(String paccount);
 }

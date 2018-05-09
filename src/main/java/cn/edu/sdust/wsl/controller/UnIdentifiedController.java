@@ -34,7 +34,7 @@ public class UnIdentifiedController {
     public String routeIndex(Model model) { //@RequestParam
         List<UnIdentified> res = unIdentifiedService.selectAll(0);
         model.addAttribute("data", res);
-        return "index";
+        return "/WEB-INF/view/index";
     }
 
     @RequestMapping(value = "getdetail", method = RequestMethod.GET)
@@ -42,7 +42,7 @@ public class UnIdentifiedController {
         UnIdentified un = unIdentifiedService.selectByPrimaryKey(uid);
         model.addAttribute("animal", un);
         model.addAttribute("location", locationService.selectByKey(un.getLid()));
-        return "detail";
+        return "/WEB-INF/view/detail";
     }
 
     @RequestMapping(value = "nextdetail", method = RequestMethod.GET)
@@ -53,7 +53,7 @@ public class UnIdentifiedController {
         }
         model.addAttribute("animal", un);
         model.addAttribute("location", locationService.selectByKey(un.getLid()));
-        return "detail";
+        return "/WEB-INF/view/detail";
     }
 
     @RequestMapping(value = "predetail", method = RequestMethod.GET)

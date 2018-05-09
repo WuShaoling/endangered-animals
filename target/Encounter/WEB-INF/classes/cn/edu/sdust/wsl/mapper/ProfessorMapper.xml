@@ -18,6 +18,15 @@
         from professor
         where pid = #{pid,jdbcType=INTEGER}
     </select>
+
+    <select id="selectByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from professor
+        where paccount = #{paccount,jdbcType=VARCHAR}
+    </select>
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from professor
     where pid = #{pid,jdbcType=INTEGER}

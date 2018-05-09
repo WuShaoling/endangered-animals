@@ -13,22 +13,41 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("/professor")
 public class ProfessorController {
 
     @Autowired
     private ProfessorService professorService;
 
     /**
-     * 注册
+     * 注册界面路由
      *
-     * @param professor
      * @return
      */
-    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @RequestMapping(value = "/toregister", method = {RequestMethod.GET})
+    public String toRegister() {
+        return "register";
+    }
+
+    /**
+     * 注册
+     *
+     * @param account
+     * @param username
+     * @param password
+     * @param phone
+     * @param email
+     * @return
+     */
+    @RequestMapping(value = "/professor/register", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> registerProfessor(Professor professor) {
+    public Map<String, Object> registerProfessor(String account,
+                                                 String username,
+                                                 String password,
+                                                 String phone,
+                                                 String email) {
         Map<String, Object> result = new HashMap<String, Object>();
+
+        Professor professor = new Professor(account, username, password, phone, email);
 
         String check = professorService.CheckProfessorInfo(professor);
         if (null != check) {
@@ -37,8 +56,41 @@ public class ProfessorController {
             return result;
         }
 
+        System.out.println("this");
+
+        Professor already = professorService.selectByAccount(account);
+        System.out.println(already == null);
+
+        if (already != null) {
+            result.put("code", -1);
+            result.put("content", "账号已存在");
+            return result;
+        }else{
+
+        }
+
         result.put("code", professorService.insert(professor));
         return result;
+    }
+
+    /**
+     * 登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping(value = "/professor/login", method = RequestMethod.POST)
+    @ResponseBody
+    public String loginProfessor(String username, String password) {
+        Professor p = professorService.selectByAccount(username);
+        if (p == null) {
+            return "用户不存在";
+        } else if (!p.getPcode().equals(password)) {
+            return "用户名或密码错误";
+        } else {
+            return "1";
+        }
     }
 
 }
